@@ -1,0 +1,6 @@
+
+label 处理方式:
+保留 Car、Van、Truck、
+合并 Pedestrian、Person_sitting、Cyclist为同一个类别 Person
+删除Tram、Misc(杂项）或’DontCare
+
