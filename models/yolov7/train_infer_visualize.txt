@@ -1,0 +1,28 @@
+
+训练train：
+python train.py --workers 8 --device 0 --batch-size 2 --data ./data/dataset.yaml --img 1280 480 --cfg cfg/training/yolov7.yaml --weights 'yolov7_training.pt' --name yolov7 --hyp data/hyp.scratch.p5.yaml
+
+评估test(image和label都放到\dataset\yolo\val路径下)：
+python test.py --data ./data/dataset.yaml --img 640 --batch 8 --conf 0.001 --iou 0.65 --device 0 --weights runs/train/yolov78/weights/best.pt --name yolov7 --verbose --save-json
+
+推理inference/可视化visualize：
+python detect.py --weights runs/train/yolov78/weights/best.pt --conf 0.25 --img-size 640 --source dataset/yolo/val/images/007161.png
+
+
+
+(打开命令行终端（Windows 下可以是 cmd 或者 PowerShell），然后切换到包含 train.py 和相关文件的目录下。
+然后，将整行命令输入并按下回车键即可开始训练。在终端中，你可以直接输入 python 文件名.py 来运行你的 Python 脚本。
+例如，如果你的文件名是 train.py，你可以输入 python train.py 然后按下回车键来运行。)
+
+
+A100中，在terminal启动训练：
+python train.py --workers 8 --device 0 --batch-size 16 --epochs 100 --data ./data/dataset.yaml --img 1280 480 --cfg cfg/training/yolov7.yaml --weights 'yolov7_training.pt' --name yolov7 --hyp data/hyp.scratch.p5.yaml 
+
+在后台运行训练，关闭terminal不受影响: nohup 训练命令 &
+nohup python train.py --workers 8 --device 0 --batch-size 16 --epochs 100 --data ./data/dataset.yaml --img 1280 480 --cfg cfg/training/yolov7.yaml --weights 'yolov7_training.pt' --name yolov7 --hyp data/hyp.scratch.p5.yaml &
+
+查看历史过程记录:
+tail -f nohup.out 用于持续监视并实时显示运行脚本的最新输出。
+cat nohup.out 简单地一次性显示 nohup.out 文件的全部内容。这对于回顾过去的输出或者想要查看自脚本运行以来的完整输出非常有用。
+
+
